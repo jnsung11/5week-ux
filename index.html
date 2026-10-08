@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{background: black; color: white; text-align: center;
+             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;}
+
+        .screen{position: relative; width: 800px; margin: 40px auto 0;}
+        .back{width: 100%; display: block;}
+        .layer{position: absolute; left: 0; top: 0; width: 100%;}
+        .filter{position: absolute;
+                left: 18.7%; top: 4.5%; width: 63%; height: 91%;
+                border-radius: 3%;
+                background: hsl(30,50%,50%);
+                opacity: 0.4;}
+
+        .shutter{position: fixed; top: -60px; right: -80px;}
+
+        .label{margin: 20px 0 5px;
+               font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;}
+    </style>
+</head>
+<body>
+
+    <div class="screen">
+        <img src="background.png" class="back">
+        <img src="man.png" class="layer">
+        <div class="filter" id="filter"></div>
+        <img src="focus.png" class="layer">
+    </div>
+
+    <p class="label">White Balance</p>
+    <input type="range" id="wb" min="0" max="360" value="30">
+    <p class="label">Saturation</p>
+    <input type="range" id="sat" min="0" max="100" value="50">
+    <p class="label">Brightness</p>
+    <input type="range" id="light" min="0" max="100" value="50">
+
+    <p class="label" id="info">hsl(30,50%,50%)</p>
+
+    <img src="button.png" class="shutter" id="shutter" width="400">
+    <audio src="photosound.mp3" id="snd"></audio>
+
+    <script>
+        wb.oninput = function(){
+            filter.style.background =
+                "hsl("+wb.value+","+sat.value+"%,"+light.value+"%)";
+            info.innerHTML =
+                "hsl("+wb.value+","+sat.value+"%,"+light.value+"%)";
+        }
+        sat.oninput = function(){
+            filter.style.background =
+                "hsl("+wb.value+","+sat.value+"%,"+light.value+"%)";
+            info.innerHTML =
+                "hsl("+wb.value+","+sat.value+"%,"+light.value+"%)";
+        }
+        light.oninput = function(){
+            filter.style.background =
+                "hsl("+wb.value+","+sat.value+"%,"+light.value+"%)";
+            info.innerHTML =
+                "hsl("+wb.value+","+sat.value+"%,"+light.value+"%)";
+        }
+
+        shutter.onclick = function(){
+            snd.play();
+        }
+    </script>
+</body>
+</html>
